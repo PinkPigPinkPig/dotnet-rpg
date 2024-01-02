@@ -37,16 +37,19 @@ namespace dotnet_rpg.Data
                 .FirstOrDefaultAsync(user => user.Username.ToLower().Equals(username.ToLower()));
             if (user is null)
             {
+                Console.WriteLine(1);
                 response.Success = false;
                 response.Message = "User not found.";
             }
             else if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
             {
+                Console.WriteLine(2);
                 response.Success = false;
                 response.Message = "Wrong password";
             }
             else
             {
+                Console.WriteLine(3);
                 response.Data = CreateToken(user);
             }
 
